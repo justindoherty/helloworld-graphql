@@ -2,8 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ApolloModule } from 'apollo-angular';
+import { ApolloClient, createNetworkInterface } from 'apollo-client';
 
 import { AppComponent } from './app.component';
+
+const client = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: 'http://localhost:4567'
+  })
+});
+
+export function provideClient(): ApolloClient {
+  return client;
+}
 
 @NgModule({
   declarations: [
@@ -12,7 +24,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ApolloModule.forRoot(provideClient)
   ],
   providers: [],
   bootstrap: [AppComponent]
