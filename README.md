@@ -15,3 +15,4 @@ The client will be done in [Angular](https://angular.io/) and use the [Apollo Cl
 - [ ] Push updates to a query from the server and have the Angular application update
 - [ ] Explore paging and filtering
 - [ ] Figure out how strong typing of TypeScript works since GraphQL allows for partial object data
+- [ ] Integrate with [@ngrx/store](https://github.com/ngrx/store)
