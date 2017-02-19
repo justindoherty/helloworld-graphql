@@ -7,3 +7,9 @@ The server will be a [Spark](http://sparkjava.com/) server because it is suppose
 
 ### Client
 The client will be done in [Angular](https://angular.io/) and use the [Apollo Client](http://dev.apollodata.com/). I've chosen [Angular](https://angular.io/) because it is the most likely client side framework that I'd use in the near future for a new project.
+
+## Goals
+* Call a GraphQL endpoint from within an Angular application
+* Push updates to a query from the server and have the Angular application update
+* Explore paging and filtering
+* How do types work in an Angular application since GraphQL allows for partial data
