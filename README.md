@@ -12,6 +12,7 @@ The client will be done in [Angular](https://angular.io/) and use the [Apollo Cl
 - [x] Get a basic GraphQL server running
 - [x] Call a basic GraphQL endpoint from within an Angular application
 - [ ] Query for nested data
+- [ ] Update data from client to server
 - [ ] Push updates to a query from the server and have the Angular application update
 - [ ] Explore paging and filtering
 - [ ] Figure out how strong typing of TypeScript works since GraphQL allows for partial object data
