@@ -21,7 +21,7 @@ public class Main {
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false));
 
     public static void main(String[] args) {
-        Main.enableCORS("http://localhost:4200", "POST", "");
+        Main.enableCORS("*", "*", "");
         GraphQLObjectType queryType = newObject()
                 .name("helloWorldQuery")
                 .field(newFieldDefinition()
@@ -44,8 +44,9 @@ public class Main {
             if (variables == null) {
                 variables = Collections.emptyMap();
             }
+            String operationName = (String) payload.get("operationName");
             ExecutionResult executionResult =
-                    graphql.execute(payload.get("query").toString(), null, null, variables);
+                    graphql.execute(payload.get("query").toString(), operationName, null, variables);
             Map<String, Object> result = new LinkedHashMap<>();
             if (executionResult.getErrors().size() > 0) {
                 result.put("errors", executionResult.getErrors());
