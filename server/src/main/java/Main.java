@@ -28,6 +28,10 @@ public class Main {
                         .type(GraphQLString)
                         .name("hello")
                         .staticValue("world"))
+                .field(newFieldDefinition()
+                        .type(GraphQLString)
+                        .name("justin")
+                        .staticValue("is cool"))
                 .build();
 
         GraphQLSchema schema = GraphQLSchema.newSchema()
@@ -39,7 +43,7 @@ public class Main {
         post("/", (request, response) -> {
             Map<String, Object> payload;
             payload = mapper.get().readValue(request.body(), Map.class);
-            Map<String,Object> variables =
+            Map<String, Object> variables =
                     (Map<String, Object>) payload.get("variables");
             if (variables == null) {
                 variables = Collections.emptyMap();
