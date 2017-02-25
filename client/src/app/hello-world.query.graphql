@@ -1,3 +1,10 @@
-query helloWorld {
-    hello
+query {
+  hello
+  human {
+    name
+    age
+    dog {
+      name
+    }
+  }
 }

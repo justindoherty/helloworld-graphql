@@ -2,6 +2,17 @@
 type Query {
     # The hello
     hello: String
+    human: Person
+}
+
+type Person {
+    name: String!
+    age: Int
+    dog: Dog
+}
+
+type Dog {
+    name: String!
 }
 
 schema {

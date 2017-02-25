@@ -10,11 +10,11 @@
         {
           "kind": "OBJECT",
           "name": "Query",
-          "description": "",
+          "description": "Root Query",
           "fields": [
             {
               "name": "hello",
-              "description": "",
+              "description": "The hello",
               "args": [],
               "type": {
                 "kind": "SCALAR",

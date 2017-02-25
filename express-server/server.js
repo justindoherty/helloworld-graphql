@@ -12,10 +12,31 @@ if (fileNames.length === 0) {
 
 const typeDefs = fileNames.map(fileName => fs.readFileSync(fileName, 'utf8'));
 
+class PersonResolver {
+    name(args, context) {
+        return 'super';
+    }
+    age() {
+        return 123;
+    }
+    dog() {
+        return new DogResolver();
+    }
+}
+
+class DogResolver {
+    name() {
+        return 'rufus';
+    }
+}
+
 const resolvers = {
     Query: {
         hello(obj, args, context, info) {
             return 'world';
+        },
+        human() {
+            return new PersonResolver();
         }
     }
 };
