@@ -19,6 +19,8 @@ This was abandoned because it wasn't as simple as I desired and didn't offer the
 - [ ] Update data from client to server
 - [ ] Push updates to a query from the server and have the Angular application update
 - [ ] Explore paging and filtering
-- [ ] Figure out how strong typing of TypeScript works since GraphQL allows for partial object data
+- [x] Figure out how strong typing of TypeScript works since GraphQL allows for partial object data
   - https://dev-blog.apollodata.com/graphql-dx-d35bcf51c943
+  - https://www.npmjs.com/package/apollo-codegen
+    Generates interface file from schema and graphql files
 - [ ] Integrate with [@ngrx/store](https://github.com/ngrx/store)
