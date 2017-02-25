@@ -1,0 +1,30 @@
+{
+  "name": "helloworld-graphql-express-server",
+  "version": "0.0.0",
+  "description": "A hello world GraphQL server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justindoherty/helloworld-graphql.git"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "author": "Justin Doherty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justindoherty/helloworld-graphql/issues"
+  },
+  "homepage": "https://github.com/justindoherty/helloworld-graphql#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "graphql": "^0.9.1",
+    "graphql-server-express": "^0.6.0",
+    "graphql-tools": "^0.10.0"
+  }
+}
