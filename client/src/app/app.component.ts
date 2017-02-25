@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
+import 'rxjs/add/operator/map';
 
-const HelloWorld = gql`
-  query helloWorldQuery {
-    hello
-  }
-`;
+import helloWorldQuery from 'graphql-tag/loader!./hello-world.query.graphql';
+import { HelloWorldQuery } from './schema';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +17,8 @@ export class AppComponent implements OnInit {
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
-    this.apollo.watchQuery({ query: HelloWorld })
-      .subscribe(({data}) => this.data = data);
+    this.apollo.watchQuery({ query: helloWorldQuery })
+      .map(ret => ret.data)
+      .subscribe((data: HelloWorldQuery) => this.data = data);
   }
 }

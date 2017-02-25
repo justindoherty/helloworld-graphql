@@ -5,6 +5,12 @@ The goal of this repository is to try out GraphQL to become familiar with the te
 ### Client
 The client will be done in [Angular](https://angular.io/) and use the [Apollo Client](http://dev.apollodata.com/). I've chosen [Angular](https://angular.io/) because it is the most likely client side framework that I'd use in the near future for a new project.
 
+#### Usage
+1. Before anything you must `npm install`
+1. Ensure a GraphQL server is running because it's needed to generate the GraphQL TypeScript types
+1. Generate the GraphQL types `npm run graphql`
+1. Finally run the server `npm start`
+
 ### Server
 The server will be an [Express](http://expressjs.com/) node.js server. It is well supported, performant and easy to set up. I will then use [graphql-server](http://graphql.org/code/#graphql-server-http-dev-apollodata-com-tools-graphql-server-index-html-github-https-github-com-apollostack-graphql-server-npm-https-www-npmjs-com-package-graphql-server) and a set of GraphQL packages offered by [Apollo](http://dev.apollodata.com/tools/graphql-server/index.html) for the server side implementation.
 

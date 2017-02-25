@@ -3,6 +3,8 @@
 # compiled output
 /dist
 /tmp
+/schema.json
+/src/app/schema.ts
 
 # dependencies
 /node_modules
