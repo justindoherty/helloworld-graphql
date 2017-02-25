@@ -21,7 +21,7 @@ This was abandoned because it wasn't as simple as I desired and didn't offer the
 ## Goals
 - [x] Get a basic GraphQL server running
 - [x] Call a basic GraphQL endpoint from within an Angular application
-- [ ] Query for nested data
+- [x] Query for nested data
 - [ ] Update data from client to server
 - [ ] Push updates to a query from the server and have the Angular application update
 - [ ] Explore paging and filtering
