@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 
 const client = new ApolloClient({
   networkInterface: createNetworkInterface({
-    uri: 'http://localhost:4567'
+    uri: 'http://localhost:4000/graphql'
   })
 });
 

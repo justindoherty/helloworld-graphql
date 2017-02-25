@@ -2,11 +2,15 @@
 The goal of this repository is to try out GraphQL to become familiar with the technology to possibly apply it toward future projects
 
 ## Setup
-### Server
-The server will be a [Spark](http://sparkjava.com/) server because it is supposed to be simple to setup. I will then use [graphql-java](https://github.com/graphql-java) for the server side GraphQL implementation.
-
 ### Client
 The client will be done in [Angular](https://angular.io/) and use the [Apollo Client](http://dev.apollodata.com/). I've chosen [Angular](https://angular.io/) because it is the most likely client side framework that I'd use in the near future for a new project.
+
+### Server
+The server will be an [Express](http://expressjs.com/) node.js server. It is well supported, performant and easy to set up. I will then use [graphql-server](http://graphql.org/code/#graphql-server-http-dev-apollodata-com-tools-graphql-server-index-html-github-https-github-com-apollostack-graphql-server-npm-https-www-npmjs-com-package-graphql-server) and a set of GraphQL packages offered by [Apollo](http://dev.apollodata.com/tools/graphql-server/index.html) for the server side implementation.
+
+### ~~Java Server (abandoned)~~
+~~The server will be a [Spark](http://sparkjava.com/) server because it is supposed to be simple to setup. I will then use [graphql-java](https://github.com/graphql-java) for the server side GraphQL implementation.
+This was abandoned because it wasn't as simple as I desired and didn't offer the support for pushing updates from the server that the node.js implementation does.~~
 
 ## Goals
 - [x] Get a basic GraphQL server running
