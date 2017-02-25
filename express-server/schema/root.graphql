@@ -1,0 +1,9 @@
+# Root Query
+type Query {
+    # The hello
+    hello: String
+}
+
+schema {
+  query: Query
+}

@@ -1,27 +1,27 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
-var { makeExecutableSchema } = require('graphql-tools');
+const express = require('express');
+const bodyParser = require('body-parser');
+const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
+const { makeExecutableSchema } = require('graphql-tools');
+const fs = require('fs');
+const glob = require('glob');
 
-var typeDefs = [`
-type Query {
-  hello: String
+const fileNames = glob.sync('./schema/*.graphql')
+if (fileNames.length === 0) {
+    throw GraphQLLoaderError.zeroMatchError(pattern)
 }
 
-schema {
-  query: Query
-}`];
+const typeDefs = fileNames.map(fileName => fs.readFileSync(fileName, 'utf8'));
 
-var resolvers = {
+const resolvers = {
     Query: {
-        hello(root) {
+        hello(obj, args, context, info) {
             return 'world';
         }
     }
 };
 
-var schema = makeExecutableSchema({ typeDefs, resolvers });
-var app = express();
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+const app = express();
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "*");
