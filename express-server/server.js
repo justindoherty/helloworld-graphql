@@ -1,9 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
-const { makeExecutableSchema } = require('graphql-tools');
-const fs = require('fs');
-const glob = require('glob');
+import express from 'express';
+import bodyParser from 'body-parser';
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import { makeExecutableSchema } from 'graphql-tools';
+import fs from 'fs';
+import glob from 'glob';
 
 const fileNames = glob.sync('./schema/*.graphql')
 if (fileNames.length === 0) {
