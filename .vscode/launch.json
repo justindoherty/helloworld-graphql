@@ -8,6 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Server",
+            "runtimeExecutable": "${workspaceRoot}/express-server/node_modules/.bin/babel-node",
             "program": "${workspaceRoot}/express-server/server.js",
             "cwd": "${workspaceRoot}/express-server"
         },
