@@ -95,5 +95,5 @@ const subscriptionServer = new SubscriptionServer({
     subscriptionManager
 }, {
         server: server, // or use existing server with different path
-        path: '/'
+        path: '/graphqlsocket'
     });
