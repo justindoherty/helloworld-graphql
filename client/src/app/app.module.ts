@@ -11,11 +11,13 @@ import helloWorldQueryString from 'raw-loader!./hello-world.query.graphql';
 import helloWorldQuery from 'graphql-tag/loader!./hello-world.query.graphql';
 import { AppComponent } from './app.component';
 
+const address = `${location.hostname}:4000`;
+
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:4000/graphql'
+  uri: `http://${address}/graphql`
 });
 
-const wsClient = new SubscriptionClient('ws://localhost:4000', {
+const wsClient = new SubscriptionClient(`ws://${address}`, {
   reconnect: true
 });
 
