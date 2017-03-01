@@ -1,16 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { ApolloModule } from 'apollo-angular';
+import { ApolloModule, Apollo } from 'apollo-angular';
 import { ApolloClient, createNetworkInterface } from 'apollo-client';
+import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
+import 'rxjs/add/operator/do';
 
+import helloWorldQueryString from 'raw-loader!./hello-world.query.graphql';
+import helloWorldQuery from 'graphql-tag/loader!./hello-world.query.graphql';
 import { AppComponent } from './app.component';
 
-const client = new ApolloClient({
-  networkInterface: createNetworkInterface({
+const networkInterface = createNetworkInterface({
     uri: 'http://localhost:4000/graphql'
-  })
+  });
+
+const wsClient = new SubscriptionClient('ws://localhost:4000', {
+  reconnect: true
+});
+
+addGraphQLSubscriptions(networkInterface, wsClient);
+
+const client = new ApolloClient({
+  networkInterface
 });
 
 export function provideClient(): ApolloClient {
@@ -30,4 +42,12 @@ export function provideClient(): ApolloClient {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(apollo: Apollo, ngZone: NgZone) {
+    const origSubscribe = apollo.subscribe;
+    // Subscription events were not being recognized
+    apollo.subscribe = (options) => {
+      return origSubscribe.call(apollo, options).do(() => ngZone.run(()=>{}));
+    }
+  }
+}

@@ -1,7 +1,10 @@
+import { createServer } from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import { SubscriptionManager, PubSub } from 'graphql-subscriptions';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
 import fs from 'fs';
 import glob from 'glob';
 
@@ -38,11 +41,38 @@ const resolvers = {
         human() {
             return new PersonResolver();
         }
+    },
+    Subscription: {
+        thing(index) {
+            return `thing ${index}`;
+        }
     }
 };
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+const pubsub = new PubSub();
+const subscriptionManager = new SubscriptionManager({
+    schema,
+    pubsub,
+    setupFunctions: {
+        thing: (options, args) => ({
+            thingChannel: {
+                filter: thing => {
+                    return true;
+                }
+            }
+        }),
+    }
+});
+let index = 0;
+setInterval(() => {
+    console.log(`interval ${index}`);
+    pubsub.publish('thingChannel', index++);
+}, 2000);
+
 const app = express();
+
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "*");
@@ -55,4 +85,14 @@ app.use((req, res, next) => {
 });
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
-app.listen(4000, () => console.log('Now browse to localhost:4000/graphiql'));
+
+const server = createServer(app);
+
+server.listen(4000, () => console.log('Now browse to localhost:4000/graphiql'));
+
+const subscriptionServer = new SubscriptionServer({
+    subscriptionManager
+}, {
+        server: server, // or use existing server with different path
+        path: '/'
+    });

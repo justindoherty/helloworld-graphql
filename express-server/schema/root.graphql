@@ -15,6 +15,11 @@ type Dog {
     name: String!
 }
 
+type Subscription {
+    thing: String
+}
+
 schema {
   query: Query
+  subscription: Subscription
 }

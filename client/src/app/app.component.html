@@ -1,6 +1,5 @@
 <h1>
   {{title}}
 </h1>
-<p>
-  {{ data | json }}
-</p>
+<p>{{ data | async | json }}</p>
+<p>{{ subscriptionData | async | json }}</p>
