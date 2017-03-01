@@ -15,6 +15,7 @@ import { HelloRealtimeWorldSubscription, HelloWorldQuery } from './schema';
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
+  input: String;
   data: Observable<HelloWorldQuery>;
   subscriptionData: Observable<HelloRealtimeWorldSubscription>;
 
@@ -25,11 +26,11 @@ export class AppComponent implements OnInit {
     this.subscriptionData = this.apollo.subscribe({ query: helloRealtimeWorldSubscription });
   }
 
-  onClick(val: String) {
+  onSubmit() {
     this.apollo.mutate({
       mutation: helloMutantWorldMutation,
       variables: {
-        val: val
+        val: this.input
       }
     });
   }
