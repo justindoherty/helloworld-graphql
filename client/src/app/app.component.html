@@ -3,3 +3,5 @@
 </h1>
 <p>{{ data | async | json }}</p>
 <p>{{ subscriptionData | async | json }}</p>
+<input #val value="try me">
+<button (click)="onClick(val.value)">Doit</button>

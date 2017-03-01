@@ -12,8 +12,8 @@ import helloWorldQuery from 'graphql-tag/loader!./hello-world.query.graphql';
 import { AppComponent } from './app.component';
 
 const networkInterface = createNetworkInterface({
-    uri: 'http://localhost:4000/graphql'
-  });
+  uri: 'http://localhost:4000/graphql'
+});
 
 const wsClient = new SubscriptionClient('ws://localhost:4000', {
   reconnect: true
@@ -42,12 +42,12 @@ export function provideClient(): ApolloClient {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(apollo: Apollo, ngZone: NgZone) {
     const origSubscribe = apollo.subscribe;
     // Subscription events were not being recognized
     apollo.subscribe = (options) => {
-      return origSubscribe.call(apollo, options).do(() => ngZone.run(()=>{}));
+      return origSubscribe.call(apollo, options).do(() => setTimeout(() => ngZone.run(() => { })));
     }
   }
 }

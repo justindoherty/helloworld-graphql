@@ -15,11 +15,18 @@ type Dog {
     name: String!
 }
 
+type Mutation {
+    tickle (
+        val: String!
+    ): String
+}
+
 type Subscription {
     thing: String
 }
 
 schema {
   query: Query
+  mutation: Mutation
   subscription: Subscription
 }

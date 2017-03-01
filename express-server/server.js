@@ -42,9 +42,15 @@ const resolvers = {
             return new PersonResolver();
         }
     },
+    Mutation: {
+        tickle(_, { val }) {
+            pubsub.publish('thingChannel', val);
+            return val;
+        }
+    },
     Subscription: {
-        thing(index) {
-            return `thing ${index}`;
+        thing(val) {
+            return val;
         }
     }
 };
@@ -65,11 +71,6 @@ const subscriptionManager = new SubscriptionManager({
         }),
     }
 });
-let index = 0;
-setInterval(() => {
-    console.log(`interval ${index}`);
-    pubsub.publish('thingChannel', index++);
-}, 2000);
 
 const app = express();
 

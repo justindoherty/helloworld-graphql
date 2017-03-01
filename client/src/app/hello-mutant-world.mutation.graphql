@@ -1,0 +1,3 @@
+mutation HelloMutantWorld($val: String!) {
+    tickle(val: $val)
+  }
