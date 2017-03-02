@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
-    this.data = this.apollo.watchQuery({ query: helloWorldQuery }).map(ret => ret.data);
+    this.data = this.apollo.watchQuery<HelloWorldQuery>({ query: helloWorldQuery }).map(ret => ret.data);
     this.subscriptionData = this.apollo.subscribe({ query: helloRealtimeWorldSubscription });
   }
 
