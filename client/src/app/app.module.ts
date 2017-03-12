@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { ApolloClient, createNetworkInterface } from 'apollo-client';
 import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
-import 'rxjs/add/operator/do';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 import helloWorldQueryString from 'raw-loader!./hello-world.query.graphql';
 import helloWorldQuery from 'graphql-tag/loader!./hello-world.query.graphql';
@@ -54,8 +55,14 @@ export class AppModule {
   constructor(apollo: Apollo, ngZone: NgZone) {
     const origSubscribe = apollo.subscribe;
     // Subscription events were not being recognized
-    apollo.subscribe = (options) => {
-      return origSubscribe.call(apollo, options).do(() => setTimeout(() => ngZone.run(() => { })));
-    }
+    apollo.subscribe = options => Observable.create((observer: Observer<any>) => {
+      const subscription = origSubscribe.call(apollo, options).subscribe(
+        res => ngZone.run(() => observer.next(res)),
+        err => ngZone.run(() => observer.error(err)),
+        () => ngZone.run(() => observer.complete())
+      );
+
+      return () => subscription.unsubscribe();
+    });
   }
 }
